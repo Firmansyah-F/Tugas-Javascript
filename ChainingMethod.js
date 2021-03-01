@@ -15,14 +15,21 @@ class Chain{
   }
 
   removeItem({item_id}){
-      
-      for (let i = 0; i < this.obj.length; i++) {
-          if(this.obj[i]['item_id']==item_id){
-              this.obj.splice(i,1)
-          }
+    //   const rm = this.obj.filter((a) => {
+    //       return a.item_id == item_id
           
-      }
-      return this;
+    //   })
+    //   console.log(rm)
+    //   console.log(this.obj)
+    //   const index = this.obj.indexOf((rm[0]),1)
+    //   this.obj.splice(index,1)
+      
+        const result = this.obj.map((e,i) => {
+            if (e.item_id == item_id) {
+                this.obj.splice(i,1)
+            }
+        })
+    return this  
   }
 
   addDiscount(disc){
