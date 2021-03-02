@@ -1,0 +1,27 @@
+{
+  "name": "xapiens-nodejs",
+  "version": "1.0.0",
+  "description": "### FIKRI",
+  "main": "Anagram.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Firmansyah-F/Tugas-Javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Firmansyah-F/Tugas-Javascript/issues"
+  },
+  "homepage": "https://github.com/Firmansyah-F/Tugas-Javascript#readme",
+  "dependencies": {
+    "@caporal/core": "^2.0.2",
+    "axios": "^0.21.1",
+    "crypto-js": "^4.0.0",
+    "fetch": "^1.1.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
