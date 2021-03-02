@@ -17,10 +17,7 @@ function add(params){
         // console.log(json)
 
         let base = JSON.parse(json)
-        const loop = base.map((e) => {
-            return (` ${e.id}`)
-        })
-        let plusId = loop.length + 1
+        let plusId = base.length + 1
         // console.log(plusId)
 
         let add = {

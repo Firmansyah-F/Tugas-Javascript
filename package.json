@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Firmansyah-F/Tugas-Javascript#readme",
   "dependencies": {
+    "@caporal/core": "^2.0.2",
     "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
     "fetch": "^1.1.0",

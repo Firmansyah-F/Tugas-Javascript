@@ -22,5 +22,11 @@
     "status": false,
     "todo": "SitUp",
     "delete_stat": true
+  },
+  {
+    "id": 5,
+    "status": false,
+    "todo": "Lari",
+    "delete_stat": false
   }
 ]
