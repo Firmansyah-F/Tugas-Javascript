@@ -1,16 +1,23 @@
 const fs = require('fs');
 
-function list(){
 
-        const json = fs.readFileSync('./todo.json', 'utf8');
-        let base = JSON.parse(json)
-        const mapping = base.map((e) => {
-            return (` ${e.id}. ${e.todo}`)
-        })
-        mapping.forEach(element => console.log(element));
+function list() {
+    const json = fs.readFileSync('./todo.json', 'utf8');
+    // console.log(json)
 
-}
-// list()
+    let base = JSON.parse(json)
+    base.map((e) => {
+      if (e.status == true && e.delete_stat == false) {
+        const done = 'Done'
+        // return `${e.id}. ${e.todo} (${done})`;
+        console.log(`${e.id}. ${e.todo} (${done})`)
+      } else if (e.delete_stat != true){
+        // return `${e.id}. ${e.todo} `;
+        console.log(`${e.id}. ${e.todo} `)
+      }
+    });
+  }
+
 
 function add(params){
         const json = fs.readFileSync('./todo.json', 'utf8');
@@ -149,31 +156,14 @@ function undone(id) {
       });
 }
 
-function status() {
-    const json = fs.readFileSync('./todo.json', 'utf8');
-    // console.log(json)
-
-    let base = JSON.parse(json)
-    base.map((e) => {
-      if (e.status == true && e.delete_stat == false) {
-        const done = 'Done'
-        // return `${e.id}. ${e.todo} (${done})`;
-        console.log(`${e.id}. ${e.todo} (${done})`)
-      } else if (e.delete_stat != true){
-        // return `${e.id}. ${e.todo} `;
-        console.log(`${e.id}. ${e.todo} `)
-      }
-    });
-  }
 
 // // #!/usr/bin/env node
 const { program } = require("@caporal/core")
 
 program
-    .command("list", "Menampilkan List kegiatan")
-    .action(({ logger , args}) => {
+    .command("list", "Menampilkan list dan Status")
+    .action(({ args }) => {
         list()
-
     })
 
     .command("add", "Menambahkan Kegiatan baru")
@@ -191,35 +181,30 @@ program
     })
     
     .command("delete", "Memperbarui Kegiatan ")
-    .argument("<id>","id yang ingin diperbarui")
+    .argument("<id>","id yang ingin dihapus")
     .action (({args}) => {
         // console.log(args.id, args.kegiatan)
         del( args.id)
     })
-    .command("clear", "Memperbarui Kegiatan ")
+    .command("clear", "Menghapus Semua kegiatan ")
     .action (({args}) => {
         // console.log(args.id, args.kegiatan)
         clear()
     })
 
-    .command("done", "Delete berdasarkan ID")
+    .command("done", " Kegiatan yang selesai dilakukan")
     .argument("<id>", "ID Done")
     .action(({  args }) => {
-      done(args.id);
+        done(args.id);
     })
   
-    .command("undone", "Delete berdasarkan ID")
+    .command("undone", "Kegiatan yang belum selesai dilakukan")
     .argument("<id>", "ID undone")
     .action(({ args }) => {
-      undone(args.id);
+        undone(args.id);
     })
 
-    .command("status", "Delete berdasarkan ID")
-    .action(({ args }) => {
-      status();
-    });
-
-
 program.run()
+
     
 
