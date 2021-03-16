@@ -1,5 +1,6 @@
 const { vehicle } = require("../db/models");
 const { baseResponse } = require("../utils/helpers/baseResponse");
+const { Op } = require("sequelize");
 
 class VehicleController {
   static async create(req, res, next) {
@@ -23,23 +24,6 @@ class VehicleController {
 
   static async getAll(req, res, next) {
     try {
-
-      // if (Object.keys(req.query).length !== 0){
-
-        if (req.query.status) {
-            const vehicleStatus = await vehicle.findAll({
-                where: {
-                    status: ["rent","off"] 
-                }
-            });
-    
-            const payload = {
-                succes: true,
-                message: "success get vehicle status",
-                data: vehicleStatus,
-            };
-            return res.json(payload)
-        }
       const getVehicles = await vehicle.findAll();
       return baseResponse({
         success: true,
@@ -50,7 +34,6 @@ class VehicleController {
       next(error);
     }
   }
-  
 
   static async uploadVehicle(req, res, next) {
     try {
@@ -100,6 +83,30 @@ class VehicleController {
         data: vehicleById,
       })(res);
     } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getVehicleGuest(req, res, next) {
+    try {
+      const dataVehicle = await vehicle.findAll({
+        where: {
+          [Op.or]: [{ status: "off" }, { status: "rent" }],
+        },
+      });
+      if (dataVehicle) {
+        return baseResponse({ 
+          message: "success", 
+          data: dataVehicle })
+          (res, 200);
+      }
+      return baseResponse({
+        success: false,
+        message: "data tidak ada",
+        data: dataVehicle,
+      })(res, 200);
+    } catch (error) {
+      res.status(500);
       next(error);
     }
   }

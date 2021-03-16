@@ -27,16 +27,12 @@ router
   );
 
 router
-  .route("/vehicles/:id")
-  .get(verifikasiJwt, permit("admin","guest"),VehicleController.getById)
+  .route("/vehicles/status").get(verifikasiJwt, permit("admin", "guest"), VehicleController.getVehicleGuest)
+  
 
 router
   .route("/vehicles/:id")
+  .get(verifikasiJwt, permit("admin","guest"),VehicleController.getById)
   .put(verifikasiJwt, permit("admin"), VehicleController.update)
-  .delete(
-    verifikasiJwt,
-    permit("admin"),
-    validateResource(vehicleSchema),
-    VehicleController.delete
-  );
+  .delete(verifikasiJwt, permit("admin"),VehicleController.delete);
 module.exports = { router };

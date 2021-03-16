@@ -116,7 +116,7 @@ class RentalController {
 
   static async delete(req, res, next) {
     try {
-      const deleteRental = await user.destroy({
+      const deleteRental = await rental.destroy({
         where: {
           id: req.params.id,
         },
