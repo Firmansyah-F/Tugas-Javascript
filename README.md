@@ -1,2 +1,0 @@
-# Movie Test
-## Fikri Firmansyah
